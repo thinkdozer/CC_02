@@ -16,7 +16,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
+    - name: Change Dir
+      run: cd /insurance/
     - name: Build
-      run: cargo build --verbose /insurance/
+      run: cargo build --verbose
     - name: Run tests
-      run: cargo test --verbose /insurance/
+      run: cargo test --verbose 
