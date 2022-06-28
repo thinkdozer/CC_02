@@ -1,0 +1,92 @@
+<!Doctype Html>
+    <Head>
+    
+    </Head>
+    <Body>
+        <div>
+        <button onclick="count()">Get Count</button>
+        </div>
+
+        <div>
+        <input type="text" placeholder="Name" name="Name" id="namefield">
+        <label for="insutype">Wählen sie den Versicherungstyp: </label>
+        <select name="insutype" id="insutype">
+            <option value="Kfz">Kfz</option>
+            <option value="Hausrat">Hausrat</option>
+            <option value="Reise">Reise</option>
+        </select>
+
+        <button onclick="new_entry()">Neuer Eintrag</button>
+        </div>
+
+        <div>
+            <input type="text" placeholder="Suche" name="sphrase" id="sphrase">
+            <button onclick="search()">Search</button>
+        </div>
+        <div>
+            <table id="stable" style="width:100%">
+                <tr>
+                    <th>id</th>
+                    <th>Name</th>
+                    <th>Datum</th>
+                    <th>Typ</th>
+                </tr>
+            </table>
+        </div>
+
+	<div>	
+	</div>
+        <script>
+            function count() {
+                //var request = new Request('http://192.168.138.215:8000/api/count/')
+                var request = new Request('/api/count/')
+                fetch(request).then(function (response) {
+                    return response.json();
+                }).then(function(text){
+                    console.log(text.quantity);
+                })
+            }
+           function new_entry(){
+                let name = document.getElementById("namefield").value;
+                let insutype = document.getElementById("insutype").value;
+                //let url = 'http://192.168.138.215:8000/api/new/?name=' + name.replaceAll(' ', '_') + '&insutype=' + insutype;
+                let url = '/api/new/?name=' + name.replaceAll(' ', '_') + '&insutype=' + insutype;
+
+                let options = {
+                    method: 'POST',
+                }
+                fetch(url, options).then(function (response){
+                    return response.json()
+                }).then(function (json){
+                    console.log(json);
+                });
+
+           }
+            function search(){
+                console.log("search()");
+                let url = "/api/search?phrase=" + document.getElementById("sphrase").value.replaceAll(' ', '_');
+                var req = new Request(url);
+                
+                fetch(req).then(function (response){
+                    return response.json();
+                })
+                .then(function (json){
+                    console.log(json);
+                    let table = document.getElementById("stable");
+                    let empty = "<tr><th>id</th><th>Name</th><th>Datum</th><th>Typ</th></tr>";
+                    let newtable = empty;
+                    for (let contract of json){
+                        newtable += "<tr><th>"+ contract.id + "</th><th>" + contract.name + "</th><th>" + contract.date + "</th><th>" + contract.insutype +  "</th></tr>";
+                    }
+                    table.innerHTML = newtable;
+                })
+
+                
+                
+                
+            }
+            
+            
+        </script>
+    </Body>
+</Html>
