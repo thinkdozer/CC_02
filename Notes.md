@@ -1,6 +1,6 @@
 # CC\_01
 
-##User Story
+## User Story
 
 Ich als Concordia Mitarbeiter möchte Versicherungen in einem System ablegen, damit ich, oder andere sie später wieder aufrufen können.
 
