@@ -9,6 +9,7 @@ mod tests {
     use super::rocket;
     use rocket::local::blocking::Client;
     use crate::*;
+    use fs::{remove_file, remove_dir};
 
 
     #[test]
@@ -25,14 +26,21 @@ mod tests {
 
     #[test]
     fn database_new(){
-        Database::tmp_new(Path::new("./folder/testdatabase"));
-        assert!(Path::new("./folder/testdatabase").exists());
-        let base = Database::tmp_new(Path::new("./folder/testdatabase"));
-        assert!(Path::new("./folder/testdatabase").exists())
+        /*
+        if Path::new("./testres/folder").exists(){
+            remove_dir(Path::new("./testres/folder"));    
+        }
+        */
+        Database::tmp_new(Path::new("./testres/folder/testdatabase.sqlite"));
+        println!("new 1");
+        assert!(Path::new("./testres/folder/testdatabase.sqlite").exists());
+        let base = Database::tmp_new(Path::new("./testres/folder/testdatabase.sqlite"));
+        println!("new 2");
+        assert!(Path::new("./testres/folder/testdatabase.sqlite").exists())
     }
     #[test]
     fn database_readwrite(){
-        let database = Database::tmp_new(Path::new("./data.sqlite"));
+        let database = Database::tmp_new(Path::new("./testres/data.sqlite"));
         let utc_date = NaiveDateTime::from_timestamp(20000000000, 0);
         let date: DateTime<Local> = Local.from_utc_datetime(&utc_date);
 
@@ -58,7 +66,7 @@ mod tests {
 
     #[test]
     fn database_count(){
-        let database = Database::tmp_new(Path::new("./count.sqlite"));
+        let database = Database::tmp_new(Path::new("./testres/database_count.sqlite"));
         let utc_date = NaiveDateTime::from_timestamp(20000000000, 0);
         let date: DateTime<Local> = Local.from_utc_datetime(&utc_date);
         
@@ -72,7 +80,7 @@ mod tests {
 
     #[test]
     fn database_search() {
-        let database = Database::tmp_new(Path::new("./search.sqlite"));
+        let database = Database::tmp_new(Path::new("./testres/search.sqlite"));
         let utc_date = NaiveDateTime::from_timestamp(20000000000, 0);
         let date: DateTime<Local> = Local.from_utc_datetime(&utc_date);
 
@@ -219,32 +227,7 @@ impl Database {
             )", []).unwrap();
         Database { connection }
     }
-    /*
-    pub fn new(path: &Path) -> Option<Database>{
-        //let connection = Connection::open(&path).unwrap_or(Database::create(path).unwrap());
-        let mut connection = Connection::open_in_memory().unwrap();
-        //connection.restore(rusqlite::DatabaseName::Main, &path, None).unwrap();
-        connection.execute("", []);
-        Some(Database{ connection })
-    }
-    fn create(path: &Path) -> Option<Connection>{
-        let connection = Connection::open_in_memory().unwrap();
-        connection.execute("
-        CREATE TABLE contracts (
-            id  INTEGER PRIMARY KEY,
-            name TEXT,
-            date INTEGER,
-            insutype TEXT
-            )", []).unwrap();
-        if let Some(parent) = &path.parent() {
-            fs::create_dir_all(parent);
-        }
-        connection.backup(rusqlite::DatabaseName::Main, &path, None).unwrap();
-        //connection.execute("i", []).unwrap();
-        println!("created new database");
-        Some(Connection::open(&path).unwrap())
-    }
-    */
+
     pub fn write(&self, ncontract: InsuContract){
         self.connection.execute(
             "INSERT INTO contracts (id, name, date, insutype) VALUES (?1, ?2, ?3, ?4)",
