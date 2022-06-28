@@ -17,7 +17,7 @@ cd insurance/
 cargo run
 ```
 
-Go to webbrowser and type in https://127.0.0.1/entry
+Go to webbrowser and type in http://127.0.0.1/entry
 
 ![type in url](pics/url.png)
 
