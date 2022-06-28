@@ -26,11 +26,9 @@ mod tests {
 
     #[test]
     fn database_new(){
-        /*
         if Path::new("./testres/folder").exists(){
             remove_dir(Path::new("./testres/folder"));    
         }
-        */
         Database::tmp_new(Path::new("./testres/folder/testdatabase.sqlite"));
         println!("new 1");
         assert!(Path::new("./testres/folder/testdatabase.sqlite").exists());
@@ -118,6 +116,7 @@ use std::marker::PhantomData;
 use std::{fmt, path::Path, fs};
 extern crate chrono;
 use serde::{Deserialize, Serialize};
+use fs::create_dir_all;
 
 #[derive(Debug)]
 pub struct InsuContract{
@@ -217,6 +216,10 @@ pub struct Database{
 
 impl Database {
     pub fn tmp_new(path: &Path)-> Database{
+        match path.parent(){
+            Some(parent) => { create_dir_all(parent).unwrap()},
+            None => {}
+        }
         let connection = Connection::open(path).unwrap();
         connection.execute(
             "create table if not exists contracts (
