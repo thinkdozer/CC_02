@@ -2,12 +2,12 @@
 
 ## User Story
 
-Ich als Concordia Mitarbeiter möchte Versicherungen in einem System ablegen, damit ich, oder andere sie später wieder aufrufen können.
+Ich als Concordia Mitarbeiter möchte Versicherungen in einem System ablegen, damit ich, oder Andere sie später wieder aufrufen können.
 
 ##### Concordia Mitarbeiter
  - Webzugriff
  - Viel Fachwissen -> effizientes Arbeiten
- - 
+ - Schnelle Suche von Verträgen z.B. bei Nachfragen vom Kunden
 
 ## Aktzeptanzkritieren
 
@@ -15,7 +15,7 @@ Ich als Concordia Mitarbeiter möchte Versicherungen in einem System ablegen, da
 
 - Ansprechendes Interface
 - Mann kann einen Knopf drücken, der einen Dialog mit Fragen öffnet. Mit diesem erstellt man dann einen neuen Vertrag.
-- Suche nach Versicherungsnummern
+- Suche nach Namen
 	- Auflistung der treffenden Verträge
 - Schnelle Antwortszeiten
 - Sicherer und Zuverlässiger Betrieb
@@ -24,15 +24,15 @@ Ich als Concordia Mitarbeiter möchte Versicherungen in einem System ablegen, da
 
 - Suche nach anderen Kriterien 
 - Auswertungen
+- Landing Page
 
-## Tasks
+## Aufgaben
 
 - [x] Backend ausprobieren:
-	- Tested Rocket and Artix -> Rocket won: ./rocket\_test/
+	- Rocket und Artix getestet -> Rocket gewann: ./rocket\_test/
 - [x] Frontend ausprobieren
-	- skipped
+	- HTML funktioniert
 - [x] Datenbank anlegen
-- [x] Backend Hinzufügen()
-- [x] Frontend Startpage
+- [x] Backend Hinzufügen
 - [x] Frontend Hinzufügen
 
