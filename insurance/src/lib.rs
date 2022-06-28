@@ -38,11 +38,13 @@ mod tests {
     }
     #[test]
     fn database_readwrite(){
+        if Path::new("./testres/data.sqlite").exists() {
+            remove_file(Path::new("./testres/data.sqlite"));
+        }
         let database = Database::tmp_new(Path::new("./testres/data.sqlite"));
         let utc_date = NaiveDateTime::from_timestamp(20000000000, 0);
         let date: DateTime<Local> = Local.from_utc_datetime(&utc_date);
 
-        //database.write(InsuContract { id: 1, name: "TEst".to_owned(), date, insutype: InsuType::Kfz});
         
         for i in 1..100 {
           database.write(InsuContract { id: i, name: "Max Musterman".to_owned(), date, insutype: InsuType::Reise })
@@ -64,6 +66,9 @@ mod tests {
 
     #[test]
     fn database_count(){
+        if Path::new("./testres/database_count.sqlite").exists() {
+            remove_file(Path::new("./testres/database_count.sqlite"));
+        }
         let database = Database::tmp_new(Path::new("./testres/database_count.sqlite"));
         let utc_date = NaiveDateTime::from_timestamp(20000000000, 0);
         let date: DateTime<Local> = Local.from_utc_datetime(&utc_date);
@@ -78,6 +83,9 @@ mod tests {
 
     #[test]
     fn database_search() {
+        if Path::new("./testres/search.sqlite").exists() {
+            remove_file(Path::new("./testres/search.sqlite"));
+        }
         let database = Database::tmp_new(Path::new("./testres/search.sqlite"));
         let utc_date = NaiveDateTime::from_timestamp(20000000000, 0);
         let date: DateTime<Local> = Local.from_utc_datetime(&utc_date);
