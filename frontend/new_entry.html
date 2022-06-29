@@ -1,24 +1,75 @@
 <!Doctype Html>
     <Head>
+        <style>
+            :root {
+                --radius: 3px;
+            }
+            body {
+             margin: 10px;   
+            }
+            h1 {
+                
+            }
+            .center{
+                text-align: center;
+                margin-left: auto;
+                margin-right: auto;
+                display: block;
+            }
+            .top-bar{
+                padding: 10px;
+                background-color: darkblue;
+                border-radius: var(--radius);
+            }
+            h1, input, label{
+                margin: 10px;
+            }
+            .placeholder{
+                height: 20px;
+            }
+            button, select {
+                background-color: darkblue;
+                color: white;
+                border-color: darkblue;
+                border-radius: var(--radius)
+            }
+            .input{
+                background-color: grey;
+            }
+
+        </style>
     
     </Head>
     <Body>
+        <div class="top-bar">
+        <h1>Versicherungsablage CC_02</h1>
+        </div>
+            
+        <!---
         <div>
         <button onclick="count()">Get Count</button>
         </div>
+        --->
 
-        <div>
-        <input type="text" placeholder="Name" name="Name" id="namefield">
-        <label for="insutype">Wählen sie den Versicherungstyp: </label>
-        <select name="insutype" id="insutype">
-            <option value="Kfz">Kfz</option>
-            <option value="Hausrat">Hausrat</option>
-            <option value="Reise">Reise</option>
-        </select>
+        <div class="placeholder"></div>
 
-        <button onclick="new_entry()">Neuer Eintrag</button>
+        <div id="entry">
+            <div>
+                <input type="text" placeholder="Name" name="Name" id="namefield">
+                <label for="insutype">Wählen sie den Versicherungstyp: </label>
+                <select name="insutype" id="insutype">
+                    <option value="Kfz">Kfz</option>
+                    <option value="Hausrat">Hausrat</option>
+                    <option value="Reise">Reise</option>
+                </select>
+            </div>
+
+        <button class="center" onclick="new_entry()">Neuer Eintrag</button>
         </div>
-
+        
+        <div class="placeholder"></div>
+        
+        <div id="search">
         <div>
             <input type="text" placeholder="Suche" name="sphrase" id="sphrase">
             <button onclick="search()">Search</button>
@@ -31,7 +82,15 @@
                     <th>Datum</th>
                     <th>Typ</th>
                 </tr>
+                <tr><th>2</th><th>Max Mustemann</th><th>2.3.22</th><th>Hausrat</th></tr>
+                <tr><th>2</th><th>Max Mustemann</th><th>2.3.22</th><th>Hausrat</th></tr>
+                <tr><th>2</th><th>Max Mustemann</th><th>2.3.22</th><th>Hausrat</th></tr>
+                <tr><th>2</th><th>Max Mustemann</th><th>2.3.22</th><th>Hausrat</th></tr>
+                <tr><th>2</th><th>Max Mustemann</th><th>2.3.22</th><th>Hausrat</th></tr>
+                <tr><th>2</th><th>Max Mustemann</th><th>2.3.22</th><th>Hausrat</th></tr>
+                <tr><th>2</th><th>Max Mustemann</th><th>2.3.22</th><th>Hausrat</th></tr>
             </table>
+        </div>
         </div>
 
 	<div>	
