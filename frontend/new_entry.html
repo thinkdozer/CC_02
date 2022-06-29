@@ -77,7 +77,7 @@
 
         <div id="entry">
             <div>
-                <input type="text" placeholder="Name" name="Name" id="namefield">
+                <input onkeypress="listen_new_entry(event)" type="text" placeholder="Name" name="Name" id="namefield">
                 <label for="insutype">Wählen sie den Versicherungstyp: </label>
                 <select name="insutype" id="insutype">
                     <option value="Kfz">Kfz</option>
@@ -93,7 +93,7 @@
         
         <div id="search">
         <div>
-            <input type="text" placeholder="Suche" name="sphrase" id="sphrase">
+            <input type="text" placeholder="Suche" onkeypress="listen_search(event)" name="sphrase" id="sphrase">
             <button onclick="search()">Search</button>
         </div>
         <div>
@@ -104,13 +104,7 @@
                     <th>Datum</th>
                     <th>Typ</th>
                 </tr>
-                <tr><th>2</th><th>Max Mustemann</th><th>2.3.22</th><th>Hausrat</th></tr>
-                <tr><th>2</th><th>Max Mustemann</th><th>2.3.22</th><th>Hausrat</th></tr>
-                <tr><th>2</th><th>Max Mustemann</th><th>2.3.22</th><th>Hausrat</th></tr>
-                <tr><th>2</th><th>Max Mustemann</th><th>2.3.22</th><th>Hausrat</th></tr>
-                <tr><th>2</th><th>Max Mustemann</th><th>2.3.22</th><th>Hausrat</th></tr>
-                <tr><th>2</th><th>Max Mustemann</th><th>2.3.22</th><th>Hausrat</th></tr>
-                <tr><th>2</th><th>Max Mustemann</th><th>2.3.22</th><th>Hausrat</th></tr>
+                
             </table>
         </div>
         </div>
@@ -118,6 +112,12 @@
 	<div>	
 	</div>
         <script>
+            function listen_new_entry(event){
+                if (event.keyCode == 13) {
+                    new_entry();
+                }
+                
+            }
             function count() {
                 //var request = new Request('http://192.168.138.215:8000/api/count/')
                 var request = new Request('/api/count/')
@@ -125,9 +125,10 @@
                     return response.json();
                 }).then(function(text){
                     console.log(text.quantity);
-                })
+                }) 
             }
            function new_entry(){
+            
                 let name = document.getElementById("namefield").value;
                 let insutype = document.getElementById("insutype").value;
                 //let url = 'http://192.168.138.215:8000/api/new/?name=' + name.replaceAll(' ', '_') + '&insutype=' + insutype;
@@ -140,8 +141,14 @@
                     return response.json()
                 }).then(function (json){
                     console.log(json);
+                    document.getElementById("namefield").value = "";
                 });
 
+           }
+           function listen_search(event){
+               if (event.keyCode == 13){
+                   search();
+               }
            }
             function search(){
                 console.log("search()");
@@ -160,6 +167,7 @@
                         newtable += "<tr><th>"+ contract.id + "</th><th>" + contract.name + "</th><th>" + contract.date + "</th><th>" + contract.insutype +  "</th></tr>";
                     }
                     table.innerHTML = newtable;
+
                 })
 
                 
