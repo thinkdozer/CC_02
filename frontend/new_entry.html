@@ -4,8 +4,18 @@
             :root {
                 --radius: 3px;
             }
+            
+
             body {
              margin: 10px;   
+             background-color: white;
+             color: black;;
+            }
+            @media (prefers-color-scheme: dark){
+                body{
+                    background-color: black;
+                    color: white;
+                }
             }
             h1 {
                 
@@ -21,6 +31,9 @@
                 background-color: darkblue;
                 border-radius: var(--radius);
             }
+            .top-bar:first-child {
+                color: white;
+            }
             h1, input, label{
                 margin: 10px;
             }
@@ -31,10 +44,19 @@
                 background-color: darkblue;
                 color: white;
                 border-color: darkblue;
-                border-radius: var(--radius)
+                border-radius: var(--radius);
+                font-size: 1em;
+            }
+            button:hover {
+                background-color: blue;
+                border-color: blue;
             }
             .input{
                 background-color: grey;
+                border-radius: var(--radius);   
+            }
+            .tablehead {
+                font-size: large;
             }
 
         </style>
@@ -76,7 +98,7 @@
         </div>
         <div>
             <table id="stable" style="width:100%">
-                <tr>
+                <tr class="tablehead">
                     <th>id</th>
                     <th>Name</th>
                     <th>Datum</th>
