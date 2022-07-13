@@ -164,17 +164,7 @@ impl serde::ser::Serialize for InsuContract {
         s.end()
     }
 }
-/*
-impl InsuContract {
-    pub fn to_json(&self) -> String{
-        format!(r#"
-    "id": "{}",
-    "name": "{}",
-    "date": "{}",
-    "insutype":"{}""#, self.id, self.name, self.date, self.insutype)
-    }
-}
-*/
+
 
 impl fmt::Display for InsuContract{
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
